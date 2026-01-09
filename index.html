@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarkson University Admissions Survey Report 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #004e42 0%, #006856 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 78, 66, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .header .date {
+            margin-top: 20px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* Survey Stats Banner */
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #004e42;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .label {
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Section styles */
+        .section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #004e42;
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #004e42 0%, #006856 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .section h2 {
+            font-size: 1.8rem;
+            color: #004e42;
+            font-weight: 600;
+        }
+        
+        .section h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+        
+        .section p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        /* Chart containers */
+        .chart-container {
+            position: relative;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .chart-title {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+        
+        .chart-wrapper-tall {
+            position: relative;
+            height: 500px;
+        }
+        
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Key insights boxes */
+        .insight-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 5px solid #ffcd00;
+            padding: 25px;
+            border-radius: 0 15px 15px 0;
+            margin: 25px 0;
+        }
+        
+        .insight-box.success {
+            background: linear-gradient(135deg, #e6f2f0 0%, #ccebe6 100%);
+            border-left-color: #004e42;
+        }
+        
+        .insight-box.warning {
+            background: linear-gradient(135deg, #fef4e6 0%, #fde5cc 100%);
+            border-left-color: #cf4520;
+        }
+        
+        .insight-box.action {
+            background: linear-gradient(135deg, #e8f4fc 0%, #d1e9f9 100%);
+            border-left-color: #418fde;
+        }
+        
+        .insight-box h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .insight-box ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .insight-box li {
+            margin-bottom: 8px;
+        }
+        
+        /* Summary bullets */
+        .summary-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .summary-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #004e42;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Quote boxes for open-ended */
+        .quote-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #555;
+            position: relative;
+        }
+        
+        .quote-box::before {
+            content: '"';
+            font-size: 3rem;
+            color: #004e42;
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+        
+        /* Divider */
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, #004e42, #ffcd00, #004e42);
+            margin: 50px 0;
+            border-radius: 2px;
+        }
+        
+        /* Executive summary callout */
+        .exec-summary {
+            background: linear-gradient(135deg, #004e42 0%, #006856 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .exec-summary h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .exec-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .exec-summary li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            opacity: 0.95;
+        }
+        
+        .exec-summary li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffcd00;
+            font-weight: bold;
+        }
+        
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .data-table th {
+            background: #004e42;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .data-table tr:hover {
+            background: #e6f2f0;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Print styles */
+        @media print {
+            .header {
+                background: #004e42 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .section {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎓 Clarkson University</h1>
+            <div class="subtitle">Admissions Survey Analysis Report</div>
+            <div class="date">2025 Admissions Cycle • January 2025</div>
+        </div>
+        
+        <!-- Stats Banner -->
+        <div class="stats-banner">
+            <div class="stat-card">
+                <div class="number">1,127</div>
+                <div class="label">Non-Applicant Responses</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">322</div>
+                <div class="label">Parent Responses</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">1,449</div>
+                <div class="label">Total Survey Responses</div>
+            </div>
+        </div>
+        
+        <!-- Executive Summary -->
+        <div class="exec-summary">
+            <h2>📋 Executive Summary</h2>
+            <ul>
+                <li><strong>Financial concerns dominate non-applicant decisions:</strong> 24% cited financial aid package/cost of attendance as the top reason for not applying, and 34% listed it as a contributing factor.</li>
+                <li><strong>Awareness gap is critical:</strong> 35% of non-applicants felt they didn't know enough about Clarkson—the most frequently cited contributing factor.</li>
+                <li><strong>Location is a double-edged sword:</strong> Location (34%) and distance from home (29%) are major deterrents for non-applicants, yet enrolled families appreciate the rural setting for focused learning.</li>
+                <li><strong>Word of mouth drives enrollment:</strong> 43% of enrolled families heard about Clarkson through personal connections—vs. only 12% of non-applicants.</li>
+                <li><strong>Personal touch matters:</strong> Parents consistently praised individualized attention from admissions staff, coaches, and faculty as key factors in their decision.</li>
+                <li><strong>Academic offerings are a strength:</strong> 65% of enrolled families chose Clarkson primarily for academic program offerings.</li>
+            </ul>
+        </div>
+        
+        <!-- Section 1: Non-Applicants Survey Overview -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📊</div>
+                <h2>Survey 1: Non-Applicants Survey</h2>
+            </div>
+            <p>This survey was sent to students who showed initial interest in Clarkson but ultimately did not apply during the 2025 admissions cycle. Understanding their decision drivers helps identify opportunities for improvement.</p>
+            
+            <h3>How Non-Applicants Heard About Clarkson</h3>
+            <div class="chart-container">
+                <div class="chart-title">Discovery Channels for Non-Applicants (n=1,127)</div>
+                <div class="chart-wrapper-tall">
+                    <canvas id="nonApplicantDiscoveryChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>💡 Key Finding: Digital Outreach Dominates Initial Contact</h4>
+                <ul>
+                    <li><strong>Email outreach (33%)</strong> and <strong>website ads (33%)</strong> are the primary discovery channels for non-applicants</li>
+                    <li>Social media reaches only 17% of this audience, suggesting room for expansion</li>
+                    <li>Word of mouth accounts for just 12%—significantly lower than enrolled families (43%)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Section 2: Why They Didn't Apply -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">❌</div>
+                <h2>Why Students Didn't Apply</h2>
+            </div>
+            
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Top Reason for Not Applying (Single Select)</div>
+                    <div class="chart-wrapper">
+                        <canvas id="topReasonChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">All Contributing Factors (Multi-Select)</div>
+                    <div class="chart-wrapper">
+                        <canvas id="allReasonsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="insight-box warning">
+                <h4>⚠️ Critical Barrier: Financial Aid Concerns</h4>
+                <ul>
+                    <li><strong>Financial Aid Package/Cost of Attendance</strong> is the #1 reason students don't apply (24%)</li>
+                    <li>This occurs before students even receive an aid offer—suggesting a perception problem, not just a pricing problem</li>
+                    <li>Proactive financial aid communication early in the funnel could address this</li>
+                </ul>
+            </div>
+            
+            <div class="insight-box warning">
+                <h4>⚠️ Awareness Gap: Students Don't Know Enough</h4>
+                <ul>
+                    <li><strong>35% felt they didn't know enough</strong> about Clarkson—the most common contributing factor</li>
+                    <li>This is an actionable opportunity: these students were interested but information barriers prevented application</li>
+                    <li>Richer program information, student testimonials, and virtual experiences could help</li>
+                </ul>
+            </div>
+            
+            <div class="insight-box">
+                <h4>📍 Location & Distance Combined</h4>
+                <ul>
+                    <li><strong>Location (34%)</strong> and <strong>Distance from Home (29%)</strong> are major factors</li>
+                    <li>These are partially addressable through emphasizing unique benefits of the Potsdam location</li>
+                    <li>Success stories of students who thrived in the rural environment could be powerful</li>
+                </ul>
+            </div>
+            
+            <h3>Open-Ended Feedback Themes from Non-Applicants</h3>
+            <p>406 respondents provided substantive feedback about their experience. Key themes emerged:</p>
+            
+            <table class="data-table">
+                <tr>
+                    <th>Theme</th>
+                    <th>Representative Feedback</th>
+                </tr>
+                <tr>
+                    <td><strong>Lack of Information</strong></td>
+                    <td>"I didn't have a ton of info on the school from current students."<br>"I conduct my own research so I was unable to truly get all the information I needed."</td>
+                </tr>
+                <tr>
+                    <td><strong>Positive Admissions Experience</strong></td>
+                    <td>"During my admissions process, the communication from the Clarkson admissions team felt clear, helpful, and genuinely personal."<br>"When speaking to admissions I had a great experience."</td>
+                </tr>
+                <tr>
+                    <td><strong>Program Mismatch</strong></td>
+                    <td>"My friend that went there made it seem interesting but it didn't offer the program of study I am interested in."<br>"I was interested in a 4-year bachelor's nursing program which is not offered here."</td>
+                </tr>
+                <tr>
+                    <td><strong>Low Visibility</strong></td>
+                    <td>"It was not talked about to me in the same way as other more popular universities."<br>"I didn't really know anyone that was talking about Clarkson."</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- Section 3: Parents Survey Overview -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">👨‍👩‍👧</div>
+                <h2>Survey 2: First-Year Parents Survey</h2>
+            </div>
+            <p>This survey captured insights from parents of students who enrolled at Clarkson for Fall 2025. Their perspectives reveal what's working well and where improvements can strengthen retention and satisfaction.</p>
+            
+            <h3>How Enrolled Families Discovered Clarkson</h3>
+            <div class="chart-container">
+                <div class="chart-title">Discovery Channels for Enrolled Families (n=322)</div>
+                <div class="chart-wrapper-tall">
+                    <canvas id="parentDiscoveryChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="insight-box success">
+                <h4>✅ Success Factor: Personal Connections Drive Enrollment</h4>
+                <ul>
+                    <li><strong>Word of mouth (43%)</strong> is the dominant channel for enrolled families</li>
+                    <li><strong>Legacy connections (26%)</strong> remain a strong pipeline</li>
+                    <li><strong>Leadership & Achievement Award (18%)</strong> and <strong>Athletic recruitment (15%)</strong> are effective targeted programs</li>
+                    <li>Contrast with non-applicants: digital ads reach them first, but personal connections convert to enrollment</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Section 4: Why They Chose Clarkson -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">✅</div>
+                <h2>Why Families Chose Clarkson</h2>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Reasons for Choosing Clarkson (Multi-Select, n=322)</div>
+                <div class="chart-wrapper-tall">
+                    <canvas id="whyChoseChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="insight-box success">
+                <h4>✅ Core Strengths to Emphasize</h4>
+                <ul>
+                    <li><strong>Academic Program Offerings (65%)</strong> — the leading factor by a wide margin</li>
+                    <li><strong>Financial Aid Package/Cost of Attendance (55%)</strong> — when students do apply, Clarkson's aid is competitive</li>
+                    <li><strong>Academic Reputation (52%)</strong> and <strong>Feeling/Fit (42%)</strong> round out the top factors</li>
+                    <li><strong>Career Placement (39%)</strong> is a significant draw—highlight employment outcomes more prominently</li>
+                </ul>
+            </div>
+            
+            <p><strong>Notable "Other" responses:</strong> Several parents mentioned specific differentiators including the Honors Program, direct acceptance into engineering specialties (vs. state schools requiring sophomore-year competition), The Clarkson School program, outdoor activities, and proximity to nature. One parent noted: "Our son had to be excited about Clarkson—which he was. The financial aid package made it as competitive if not even more affordable than NY state schools."</p>
+        </div>
+        
+        <!-- Section 5: Parent Concerns -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">😟</div>
+                <h2>Parent Concerns & Worries</h2>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Main Worries About Sending Student to Clarkson (n=322)</div>
+                <div class="chart-wrapper">
+                    <canvas id="worriesChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="insight-box action">
+                <h4>🎯 Opportunity: Address Common Concerns Proactively</h4>
+                <ul>
+                    <li><strong>Cost of attendance (52%)</strong> — Continue transparent communication about total costs and aid</li>
+                    <li><strong>Distance from home (38%)</strong> — Showcase transportation options, family communication tools, and community support</li>
+                    <li><strong>Academic adjustment (31%)</strong> — Highlight academic support resources and faculty accessibility</li>
+                    <li><strong>Rural location (19%)</strong> — Reframe as an advantage for focused learning and outdoor opportunities</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Section 6: Print Materials Assessment -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📬</div>
+                <h2>Print Materials Assessment</h2>
+            </div>
+            
+            <div class="two-col">
+                <div class="chart-container">
+                    <div class="chart-title">Importance of Mailed Print Materials</div>
+                    <div class="chart-wrapper">
+                        <canvas id="printImportanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Quality vs. Other Universities</div>
+                    <div class="chart-wrapper">
+                        <canvas id="printQualityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>📊 Print Materials Summary</h4>
+                <ul>
+                    <li><strong>21% consider print important or very important</strong> — still relevant for a segment of families</li>
+                    <li><strong>40% rate Clarkson's print as better or much better</strong> than competitors</li>
+                    <li>Only 2.5% rated materials as poorer quality—print is not a weakness</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Section 7: What Could Be Better -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2>Improvement Opportunities from Parents</h2>
+            </div>
+            
+            <p>141 parents provided substantive feedback on what Clarkson could do better. The feedback clustered into several themes:</p>
+            
+            <h3>Communication & Information</h3>
+            <ul class="summary-list">
+                <li>"Better communication on what needed to be done once admitted. Felt like we had to scroll the Clarkson portal to figure out what we needed to do."</li>
+                <li>"I have a hard time with communication. I can't find anything and do not receive any communication about financial aid or parents weekend."</li>
+                <li>"Included me and not just my ex-husband" — ensuring both parents receive communications</li>
+            </ul>
+            
+            <h3>Financial Aid Process</h3>
+            <ul class="summary-list">
+                <li>"Finances are a huge decision maker. Maybe having financial aid representatives more present and available."</li>
+                <li>"Explain that my child would owe several thousand dollars up front when attending even after financial aid and student loans."</li>
+                <li>"Replied to my daughter's email about help with a little more financial aid….she received no response."</li>
+            </ul>
+            
+            <h3>What's Working Well</h3>
+            <ul class="summary-list">
+                <li>"Brian Grant personally wrote a little note to our son after the visit and it wasn't vague—it was very personalized."</li>
+                <li>"I was the most impressed by Clarkson in the admissions process. There is nothing that I would change."</li>
+                <li>"Very fast as we applied very late."</li>
+                <li>"We were very pleased with our experience, particularly the help and communication with Adam Jaquish, we were in frequent communication during the process."</li>
+            </ul>
+            
+            <h3>Additional Feedback (from general comments)</h3>
+            <ul class="summary-list">
+                <li>"The communication around events and information is lacking, especially for first year students and parents. Understanding what to expect, where to get information and how to get information would be very helpful."</li>
+            </ul>
+            
+            <div class="insight-box action">
+                <h4>🎯 Top Action Items from Parent Feedback</h4>
+                <ul>
+                    <li><strong>Streamline post-acceptance checklist</strong> — Create a clear, step-by-step guide for admitted students</li>
+                    <li><strong>Improve parent communication portal</strong> — Ensure both parents receive updates; simplify navigation</li>
+                    <li><strong>Financial aid responsiveness</strong> — Ensure all inquiries receive timely responses</li>
+                    <li><strong>Update website content</strong> — Several mentions of outdated information</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Section 8: Positive Experiences -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⭐</div>
+                <h2>What's Working: Positive Impact Stories</h2>
+            </div>
+            
+            <p>194 parents shared specific people, departments, or experiences that positively impacted their view of Clarkson:</p>
+            
+            <h3>Staff & Faculty Recognized by Parents</h3>
+            <p>Click on any name to see the positive feedback they received from parents:</p>
+            
+            <style>
+                .accordion-container {
+                    margin: 20px 0;
+                }
+                .accordion-category {
+                    background: #004e42;
+                    color: white;
+                    padding: 12px 20px;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    margin-top: 15px;
+                    border-radius: 8px 8px 0 0;
+                }
+                .accordion-item {
+                    border: 1px solid #e0e0e0;
+                    border-top: none;
+                }
+                .accordion-item:last-child {
+                    border-radius: 0 0 8px 8px;
+                }
+                .accordion-header {
+                    background: #f8f9fa;
+                    padding: 15px 20px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    transition: background 0.2s;
+                    font-weight: 500;
+                }
+                .accordion-header:hover {
+                    background: #e6f2f0;
+                }
+                .accordion-header .arrow {
+                    transition: transform 0.3s;
+                    color: #004e42;
+                    font-size: 0.8rem;
+                }
+                .accordion-header.active .arrow {
+                    transform: rotate(180deg);
+                }
+                .accordion-header .mention-count {
+                    background: #ffcd00;
+                    color: #004e42;
+                    padding: 2px 10px;
+                    border-radius: 12px;
+                    font-size: 0.85rem;
+                    margin-left: 10px;
+                }
+                .accordion-content {
+                    display: none;
+                    padding: 0;
+                    background: white;
+                }
+                .accordion-content.show {
+                    display: block;
+                }
+                .feedback-item {
+                    padding: 15px 20px;
+                    border-top: 1px solid #eee;
+                    font-style: italic;
+                    color: #555;
+                    line-height: 1.6;
+                }
+                .feedback-item:first-child {
+                    border-top: none;
+                }
+                .feedback-item::before {
+                    content: '"';
+                    color: #004e42;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-right: 5px;
+                }
+                .feedback-item::after {
+                    content: '"';
+                    color: #004e42;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-left: 2px;
+                }
+            </style>
+            
+            <div class="accordion-container">
+                <!-- Admissions & Financial Aid -->
+                <div class="accordion-category">Admissions & Financial Aid</div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Brian Grant</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Was impressed that Brian Grant personally wrote a little note to our son after the visit and it wasn't a vague note, it was very personalized. Loved that.</div>
+                        <div class="feedback-item">Our son had an interview in Syracuse with Brian Grant who really took the time to sit and talk with him... Brian was reassuring, supportive and helped him feel comfortable.</div>
+                        <div class="feedback-item">Dr. Powers remembered my sons name during Admitted Students Day. Brian Grant too.</div>
+                        <div class="feedback-item">Brian Grant, spoke with him at every event that Clarkson had and actually checked us in on move in day. At that time we as parents knew it was the right place for our son.</div>
+                        <div class="feedback-item">Brian Grant repeatedly has taken the time to answer questions as well as to get to know our family. It's part of the very personal and supportive experience that was a primary reason to attend Clarkson.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Adam Jaquish</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">We were very pleased with our experience, particularly the help and communication with Adam Jaquish, we were in frequent communication during the process.</div>
+                        <div class="feedback-item">Adam Jaquish answered so many questions we had, replied promptly.</div>
+                        <div class="feedback-item">Adam Jaquish was very helpful navigating the admission and financial aid processes. Responses were quick and thoughtful.</div>
+                        <div class="feedback-item">Besides Brian Grant, we had great experiences with his admissions counselor, Adam, and the welcoming reception in Syracuse.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Chris Miner</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Christopher Miner and Brenda were helpful.</div>
+                        <div class="feedback-item">Mr. Miner and Brenda very wonderful people. Made me feel better about sending my son there. I knew that there were people who he could go to with help about anything.</div>
+                        <div class="feedback-item">Thanks to Chris Miner - he was very helpful and nice to work with during the application process.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Jonathan Moser</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Joathan Moser. I cannot say enough about him personally and his staff. He has probably thousands of students and requests about financial aid but took time to help me through the process.</div>
+                        <div class="feedback-item">Jonathan Moser and the Finance Department staff were and are awesome to work with. Professional, friendly, responsive, and helpful. I made mistakes and they helped me correct them. Wonderful people.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Jeff Gorski</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Jeff Gorski was amazing.</div>
+                        <div class="feedback-item">Jeff Gorski made us feel like he would be there for our son when we couldn't be there.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Gordon Witt</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Gordon Witt was helpful via email once accepted.</div>
+                        <div class="feedback-item">Gordon Witt and the admissions team were very informative, kind and professional.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Brianna Larrabee</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Brianna Larrabee who was Vermont's Admissions councilor. She was excellent and we felt welcomed when we visited.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Katy (Admissions)</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">The hand written card she received after being accepted from 'Katy' in admissions—it's still hanging on our fridge.</div>
+                        <div class="feedback-item">Katy Colette went above and beyond answering so many questions and guiding us through the whole admissions process.</div>
+                    </div>
+                </div>
+                
+                <!-- Coaches -->
+                <div class="accordion-category">Coaches</div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach LaMarche</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Coach LaMarche was very helpful and supportive during the decision process.</div>
+                        <div class="feedback-item">Coach LaMarche. She was very supportive & thoughtful during my daughter's ACL surgery recovery.</div>
+                        <div class="feedback-item">Carol Lamarsh set up an amazing day to show my daughter what Clarkson can offer. The admittance office was prepared and gave a welcoming and informative meeting.</div>
+                        <div class="feedback-item">Coach LaMarche and the Dean of the Biology department were big factors for my daughter.</div>
+                        <div class="feedback-item">Coach LaMarche was very helpful and instrumental in the decision to attend.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach Kane</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Coach Kane - making us feel comfortable with juggling baseball and school as well as someone who would make sure our son was doing well in classroom.</div>
+                        <div class="feedback-item">We toured last fall with Coach Kane. My son had the opportunity to chat with professors from the departments from which he was exploring as a major. He really valued and appreciated these conversations.</div>
+                        <div class="feedback-item">We had an opportunity to meet with AD Kane on that first visit and she was also extremely approachable.</div>
+                        <div class="feedback-item">Coach Kane has been very good with my son.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach Carter Lincoln</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Coach Carter Lincoln of Men's Soccer program really helped us to solidify our decision.</div>
+                        <div class="feedback-item">Had 1-on-1 with Dr. Martinez - Aerospace Engineering / visit with Soccer Coach Carter Lincoln.</div>
+                        <div class="feedback-item">Coach Lincoln was fantastic throughout the whole recruiting process and made Preston feel like Clarkson would be a great home for him.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach Sherry Dobbs</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Coach Dobbs was great in helping us connect to the college and ease our daughter's transition.</div>
+                        <div class="feedback-item">Coach Sherry Dobbs for women's basketball. My daughter was interested in the overall academic program primarily but he helped my daughter decide because she wanted to play basketball.</div>
+                        <div class="feedback-item">Sherry Dobbs was amazing as a conduit to Clarkson to ease her transition.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach McGaughey</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">The professor we met with from environmental engineering, Coach McGaughey, open house, literally everything we experienced.</div>
+                        <div class="feedback-item">Kristen McGaughey (Softball coach), overnight visit, players/students on the softball team.</div>
+                        <div class="feedback-item">Coach McGaughey was very forthcoming, honest and welcoming.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach Zac Shaw</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Zac Shaw (women's soccer coach) was also very engaging with us during the process.</div>
+                        <div class="feedback-item">Zac Shaw (women's soccer coach) suggested to me that my son looks at Clarkson. He introduced us to Carter Lincoln (men's soccer coach).</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach Klein/Kline</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Coach Klein (golf); hearing from current and former students.</div>
+                        <div class="feedback-item">Coach Kline made us feel welcome and gave us personalized attention during our visit. Everyone in the financial aid office has been extremely responsive.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Lorenzo Mencaccini & Christopher Kerven</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">The ski team coaches, Lorenzo Mencaccini and Christopher Kerven, were also incredible.</div>
+                        <div class="feedback-item">Ashley Sweeney from Ignite and the ski coaches Lorenzo and Christopher. Additionally the PHD students that welcomed my daughter into their lab.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Ally Burrows</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Ally Burrows lax coach was extremely welcoming as well as the team, and coach Gable has been great as well.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach Gable</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Coach Gable has been great as well. We also received emails from leaders in academics and athletics who were appointed as Jane's advisors, we felt that was a very personal touch.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Coach Lima</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Coach Lima and the men's soccer team were one of the best experiences my son had prior to making his decision.</div>
+                    </div>
+                </div>
+                
+                <!-- Faculty & Academic Leadership -->
+                <div class="accordion-category">Faculty & Academic Leadership</div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Dr. Susan Powers</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Dr. Powers remembered my sons name during Admitted Students Day. Brian Grant too.</div>
+                        <div class="feedback-item">Dr. Susan Powers - personally talked to our daughter.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Dr. Martinez</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">During our initial visit at Clarkson Dr. Martinez spent over an hour of his time to meet with our son to talk about the Aerospace Engineering program and took him on a visit of all the relevant labs.</div>
+                        <div class="feedback-item">Had 1-on-1 with Dr. Martinez - Aerospace Engineering / visit with Soccer Coach Carter Lincoln.</div>
+                        <div class="feedback-item">Dr. Martinez from Aero. After their visit I thought Dad might decide to attend too - they had an amazing tour!</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Dr. Steve Wojtkiewicz</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Dr. Steve Wojtkiewicz provided helpful perspective regarding engineering tract and CEM. Multiple hand-written notes during admissions process created sense of sincere interest.</div>
+                        <div class="feedback-item">Professor Wojtkiewicz was very helpful with our discussion for our child as a transfer student.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Dean Doug Bohl</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Dean Bohl and Professor McCrum joined us for lunch. They were friendly, honest, and gave great advice to us and our son. Our son felt comfortable in their presence.</div>
+                        <div class="feedback-item">A meeting my daughter had with professor Doug Bohl helped her choose her major.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Alexis Maciel</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">The director of the Computer Science program, Alexis Maciel. We met with him so Ryan could ask questions while we were there for the scholarship dinner. It was a great conversation and we felt the program would be great for Ryan.</div>
+                        <div class="feedback-item">Alexis was very helpful. He is Joshua's advisor.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Alan Rossner</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Alan Rossner's information session and discussion on internships & opportunities in the Environmental program helped with seeing if this was the right fit.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Stefan Grimberg</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Brian Grant and Stefan Grimberg were extremely helpful, communicated well, and explained how Clarkson separates itself from other options.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Dr. Larson</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">I was very impressed that the Clarkson president, Dr. Larson, was in the freshman dorms on move in day helping out and meeting families.</div>
+                    </div>
+                </div>
+                
+                <!-- Other Staff -->
+                <div class="accordion-category">Other Staff</div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Brenda (TCS)</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Brenda has been helpful and approachable during the process of getting our daughter into TCS. We met the chair of the mathematics department and that made a positive impression as well.</div>
+                        <div class="feedback-item">Our experience with The Clarkson School has exceeded our expectations. I can't say enough about Sarah or Brenda.</div>
+                        <div class="feedback-item">Brenda is great. Gave the extra attention and support early freshmen need.</div>
+                        <div class="feedback-item">Mr. Miner and Brenda very wonderful people. Made me feel better about sending my son there.</div>
+                        <div class="feedback-item">Chris Minor and Brenda were very helpful with decision to apply for Clarkson School.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Rebecca Brown</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Ms. Rebecca Brown from the International Office had a big influence - she's such a wonderful person.</div>
+                        <div class="feedback-item">Rebecca Brown, Augusto Lima (former coach), Carter Lincoln, Carter Kladstrup (senior student) [all had positive impact].</div>
+                        <div class="feedback-item">Yes, Rebecca Brown.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Ashley Sweeney</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Everyone we met with had a positive impact. From Admissions, everyone in the Honors program, Ashley Sweeney from Ignite and the ski coaches.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Case van Haasteren</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Case van Haasteren was great in communicating with us and providing guidance on applying to the honors program and the fellowship.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>ChiDee (Tour Guide)</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">The campus tour guide (ChiDee) was phenomenal with the initial tour.</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Erik Backus</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Brian Grant, Bill Bergan, Erik Backus [all had positive impact].</div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Bill Bergan</span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="feedback-item">Brian Grant, Bill Bergan, Erik Backus [all had positive impact].</div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                function toggleAccordion(header) {
+                    const content = header.nextElementSibling;
+                    const isOpen = content.classList.contains('show');
+                    
+                    // Close all other accordions (optional - remove if you want multiple open)
+                    // document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('show'));
+                    // document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+                    
+                    if (isOpen) {
+                        content.classList.remove('show');
+                        header.classList.remove('active');
+                    } else {
+                        content.classList.add('show');
+                        header.classList.add('active');
+                    }
+                }
+            </script>
+            
+            <h3>Impactful Experiences</h3>
+            <div class="quote-box">
+                "Dr. Powers remembered my sons name during Admitted Students Day. Brian Grant too."
+            </div>
+            <div class="quote-box">
+                "The hand written card she received after being accepted from 'Katy' in admissions—it's still hanging on our fridge"
+            </div>
+            <div class="quote-box">
+                "There were so many chances to go on Google Meets to learn about the engineering department. I loved the fact that there were chances to interact with the professors locally (Albany area)."
+            </div>
+            <div class="quote-box">
+                "Admissions validated the personal touch that Clarkson has to offer. I would say that is very true and very comforting."
+            </div>
+            
+            <div class="insight-box success">
+                <h4>✅ Key Success Pattern: Personal Touch at Scale</h4>
+                <p>The most impactful moments were personalized interactions: hand-written notes, remembering names, one-on-one conversations, and responsive communication. This "personal touch" is consistently cited as Clarkson's differentiator.</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Clarkson University Admissions Survey Report • Prepared January 2025</p>
+            <p>Data sources: 2025 Non-Applicants Survey (n=1,127) • 2025 First-Year Parents Survey (n=322)</p>
+        </div>
+    </div>
+    
+    <script>
+        // Clarkson Brand Color palette
+        const clarksonGreen = '#004e42';
+        const clarksonGold = '#ffcd00';
+        // Secondary bold colors
+        const boldGreen = '#7a9a01';
+        const boldOrange = '#cf4520';
+        const boldBlue = '#418fde';
+        const boldNavy = '#002d72';
+        // Secondary mature colors
+        const matureSage = '#a2a569';
+        const matureGold = '#c6893f';
+        const matureBlue = '#7bafd4';
+        const matureTeal = '#005587';
+        // Neutral colors
+        const warmGray1 = '#d7d2cb';
+        const warmGray6 = '#a59c94';
+        const warmGray11 = '#6e6259';
+        
+        const colors = [
+            clarksonGreen, '#006856', boldGreen, clarksonGold, matureGold, 
+            boldOrange, boldBlue, matureBlue, boldNavy, matureTeal,
+            matureSage, warmGray6, warmGray11
+        ];
+        
+        // Non-Applicant Discovery Chart
+        new Chart(document.getElementById('nonApplicantDiscoveryChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Email outreach from Clarkson',
+                    'Ads on various websites',
+                    'High school guidance counselor',
+                    'Social media',
+                    'Search engine',
+                    'Online news/blogs',
+                    'College fair/HS visit',
+                    'Word of mouth',
+                    'Niche',
+                    'Mailed print materials'
+                ],
+                datasets: [{
+                    label: 'Percentage of Respondents',
+                    data: [33.4, 32.7, 19.6, 17.4, 15.4, 12.6, 12.6, 12.0, 10.6, 9.6],
+                    backgroundColor: clarksonGreen,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+        
+        // Top Reason Chart
+        new Chart(document.getElementById('topReasonChart'), {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Financial Aid Package/Cost of Attendance (24%)',
+                    'Not enough info about Clarkson (14%)',
+                    'Distance from Home (13%)',
+                    'Academic Offerings (12%)',
+                    'Location (11%)',
+                    'Other (8%)',
+                    'Feeling/Fit (7%)',
+                    'Academic Reputation (7%)',
+                    'Other factors (5%)'
+                ],
+                datasets: [{
+                    data: [24.1, 13.8, 12.7, 11.5, 10.9, 7.8, 7.2, 6.8, 5.1],
+                    backgroundColor: colors
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { boxWidth: 12, font: { size: 11 } }
+                    }
+                }
+            }
+        });
+        
+        // All Reasons Chart
+        new Chart(document.getElementById('allReasonsChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Not enough info',
+                    'Location',
+                    'Financial Aid/Cost',
+                    'Distance',
+                    'Academic Offerings',
+                    'Feeling/Fit',
+                    'Academic Reputation',
+                    'Size',
+                    'Career Placement'
+                ],
+                datasets: [{
+                    label: '% citing as factor',
+                    data: [34.9, 34.0, 33.6, 28.8, 24.6, 21.2, 14.3, 13.0, 10.3],
+                    backgroundColor: boldOrange,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+        
+        // Parent Discovery Chart
+        new Chart(document.getElementById('parentDiscoveryChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Word of mouth (friends/family/alum)',
+                    'Legacy connection',
+                    'High school guidance counselor',
+                    'Leadership & Achievement Award',
+                    'Athletic recruit',
+                    'College fair/HS visit',
+                    'Current Clarkson student',
+                    'Mailed print materials',
+                    'Live in the area',
+                    'Search engine'
+                ],
+                datasets: [{
+                    label: 'Percentage',
+                    data: [42.9, 26.1, 22.4, 18.3, 15.2, 14.3, 14.0, 13.7, 12.1, 11.2],
+                    backgroundColor: clarksonGreen,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+        
+        // Why Chose Clarkson Chart
+        new Chart(document.getElementById('whyChoseChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Academic Program Offerings',
+                    'Financial Aid Package/Cost of Attendance',
+                    'Academic Reputation',
+                    'Feeling/Fit',
+                    'Career Placement/Network',
+                    'Size of University',
+                    'Athletic Program(s)',
+                    'Hands-On Learning',
+                    'Location',
+                    'Distance from Home',
+                    'Legacy'
+                ],
+                datasets: [{
+                    label: '% of families',
+                    data: [64.9, 55.0, 51.6, 41.6, 39.1, 27.6, 24.8, 20.2, 15.8, 12.4, 9.9],
+                    backgroundColor: clarksonGreen,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 80,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+        
+        // Worries Chart
+        new Chart(document.getElementById('worriesChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Cost of attendance',
+                    'Distance from home',
+                    'First time on own',
+                    'Academic rigors',
+                    'Rural location',
+                    'Social involvement',
+                    'Academic support',
+                    'Extracurricular involvement'
+                ],
+                datasets: [{
+                    label: '% of parents',
+                    data: [51.9, 37.6, 34.2, 31.4, 18.6, 17.1, 16.5, 9.3],
+                    backgroundColor: matureGold,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 60,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+        
+        // Print Importance Chart
+        new Chart(document.getElementById('printImportanceChart'), {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Somewhat important (35%)',
+                    'Not very important (28%)',
+                    'Not at all important (15%)',
+                    'Important (15%)',
+                    'Very important (6%)'
+                ],
+                datasets: [{
+                    data: [35.4, 28.3, 15.2, 14.9, 6.2],
+                    backgroundColor: [matureBlue, warmGray6, warmGray1, clarksonGold, clarksonGreen]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 12, font: { size: 10 } }
+                    }
+                }
+            }
+        });
+        
+        // Print Quality Chart
+        new Chart(document.getElementById('printQualityChart'), {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Same as others (50%)',
+                    'Better (28%)',
+                    'Much better (13%)',
+                    'N/A (7%)',
+                    'Poorer (2%)'
+                ],
+                datasets: [{
+                    data: [49.7, 27.6, 12.7, 7.5, 2.5],
+                    backgroundColor: [matureBlue, clarksonGreen, boldGreen, warmGray1, boldOrange]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 12, font: { size: 10 } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
