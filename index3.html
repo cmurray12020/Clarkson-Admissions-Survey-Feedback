@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Day as a Knight 2026 — Survey Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --clarkson-green: #004e42;
+  --clarkson-gold: #ffcd00;
+  --green-dark: #003832;
+  --green-light: #e8f5f0;
+  --gold-soft: #fff8d6;
+  --text-primary: #1a2e2a;
+  --text-secondary: #4a6860;
+  --text-light: #6e8a82;
+  --bg-cream: #faf9f6;
+  --bg-white: #ffffff;
+  --accent-red: #cf4520;
+  --accent-blue: #418fde;
+  --border-subtle: #e2e8e6;
+  --shadow-sm: 0 1px 3px rgba(0,78,66,0.08);
+  --shadow-md: 0 4px 16px rgba(0,78,66,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,78,66,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero {
+  background: var(--clarkson-green);
+  color: white;
+  padding: 80px 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,205,0,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--clarkson-gold);
+}
+.hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.hero-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--clarkson-gold);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--clarkson-gold);
+}
+.hero-sub {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+}
+.hero-meta {
+  margin-top: 32px;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  text-align: left;
+}
+.hero-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--clarkson-gold);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section:last-child { border-bottom: none; }
+.section-label {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--clarkson-green);
+  margin-bottom: 8px;
+}
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--clarkson-green);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.section-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+
+.card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+}
+.card-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  border-top: 3px solid var(--clarkson-gold);
+}
+.stat-card .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--clarkson-green);
+  line-height: 1;
+}
+.stat-card .label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+.bar-chart { margin-top: 8px; }
+.bar-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 48px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.bar-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: right;
+}
+.bar-track {
+  height: 28px;
+  background: var(--green-light);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--clarkson-green);
+  min-width: 2px;
+}
+.bar-fill.gold { background: var(--clarkson-gold); }
+.bar-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stacked-chart { margin-top: 16px; }
+.stacked-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.stacked-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: right;
+  line-height: 1.3;
+}
+.stacked-track {
+  height: 32px;
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.seg {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  min-width: 0;
+}
+.seg.highly { background: var(--clarkson-green); }
+.seg.slightly { background: #5a9a89; }
+.seg.neutral { background: #b8cfc8; color: var(--text-primary); }
+.seg.s-unfav { background: #e8a88a; }
+.seg.h-unfav { background: var(--accent-red); }
+
+.stacked-legend {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.shift-viz {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 0;
+  align-items: start;
+  margin-top: 20px;
+}
+.shift-col h4 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.shift-col-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+}
+.shift-arrow {
+  font-size: 28px;
+  color: var(--clarkson-gold);
+  font-weight: 700;
+}
+.shift-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  background: var(--green-light);
+  font-size: 14px;
+}
+.shift-item .count {
+  font-weight: 700;
+  color: var(--clarkson-green);
+  font-size: 18px;
+}
+
+.shift-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+.shift-summary-card {
+  text-align: center;
+  padding: 20px 16px;
+  border-radius: 10px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-subtle);
+}
+.shift-summary-card .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+}
+.shift-summary-card .num.up { color: var(--clarkson-green); }
+.shift-summary-card .num.same { color: var(--text-light); }
+.shift-summary-card .num.down { color: var(--accent-red); }
+.shift-summary-card .label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.donut-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 8px;
+}
+.donut-card {
+  text-align: center;
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 28px 20px;
+  box-shadow: var(--shadow-sm);
+}
+.donut-card h4 {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.3;
+  min-height: 36px;
+}
+.donut-svg { width: 140px; height: 140px; margin: 0 auto; }
+.donut-center-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  fill: var(--clarkson-green);
+}
+.donut-center-sub {
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.donut-legend {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 8px;
+}
+.quote-card {
+  background: var(--bg-white);
+  border-radius: 10px;
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm);
+  border-left: 3px solid var(--clarkson-gold);
+}
+.quote-card p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-style: italic;
+}
+.quote-card .attribution {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--clarkson-green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 12px;
+  font-style: normal;
+}
+
+.theme-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.theme-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--bg-white);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.theme-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+.theme-icon.warn { background: #fff3e8; }
+.theme-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.theme-item p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.rec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 16px;
+}
+.rec-card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  border-top: 3px solid var(--clarkson-green);
+}
+.rec-card.gold-border { border-top-color: var(--clarkson-gold); }
+.rec-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--clarkson-green);
+  margin-bottom: 8px;
+}
+.rec-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.footer {
+  background: var(--clarkson-green);
+  color: rgba(255,255,255,0.5);
+  padding: 32px 40px;
+  text-align: center;
+  font-size: 13px;
+}
+.footer strong {
+  color: var(--clarkson-gold);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 48px 24px 40px; }
+  .hero h1 { font-size: 36px; }
+  .container { padding: 0 24px; }
+  .stat-row, .donut-row, .quote-grid, .theme-list, .rec-grid { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 120px 1fr 40px; }
+  .bar-label { font-size: 12px; }
+  .stacked-row { grid-template-columns: 120px 1fr; }
+  .stacked-label { font-size: 11px; }
+  .shift-viz { grid-template-columns: 1fr; gap: 16px; }
+  .shift-col-center { padding-top: 0; }
+}
+
+@media print {
+  body { font-size: 11pt; }
+  .hero { padding: 40px; }
+  .section { padding: 32px 0; }
+  .card, .stat-card, .donut-card, .quote-card, .theme-item, .rec-card { box-shadow: none; border: 1px solid #ddd; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Clarkson University · Undergraduate Admissions · 2026</div>
+    <h1>A Day as a <em>Knight</em></h1>
+    <p class="hero-sub">Post-event survey results from the 2026 accepted student visit days (February–March 2026)</p>
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <div class="hero-stat-num">71</div>
+        <div class="hero-stat-label">Total Responses</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">94%</div>
+        <div class="hero-stat-label">Worthwhile Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">86%</div>
+        <div class="hero-stat-label">Highly Favorable on Shadowing</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ EXEC SUMMARY ═══════════ -->
+<div class="section">
+  <div class="section-label">Executive Summary</div>
+  <h2>The Gold Standard of Campus Visits</h2>
+  <p class="section-desc">A Day as a Knight continues to deliver as one of Clarkson's most effective yield tools. Across 71 survey responses from the 2026 cycle, attendees overwhelmingly rate the experience as worthwhile, with the student shadowing component earning the highest marks of any element. The event moves the needle: nearly half of respondents reported increased interest in Clarkson after attending, and zero came away "not very interested."</p>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="num">90%</div>
+      <div class="label">Agree the event helped them decide where to enroll</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">85%</div>
+      <div class="label">Agree they felt excited about joining Clarkson</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">94%</div>
+      <div class="label">Agree attending was a worthwhile experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ WHO RESPONDED ═══════════ -->
+<div class="section">
+  <div class="section-label">Respondent Breakdown</div>
+  <h2>Knights and Their Kin</h2>
+  <p class="section-desc">Parents edged out accepted students in 2026, making up 54% of respondents. This heavier parent presence strengthens the feedback on logistics, communication and overall experience since parents tend to evaluate the event through a different lens than students.</p>
+
+  <div class="card">
+    <div class="card-title">Respondent Type (n = 71)</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Parents</div>
+        <div class="bar-track"><div class="bar-fill gold" style="width:53.5%"></div></div>
+        <div class="bar-value">38</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Accepted Students</div>
+        <div class="bar-track"><div class="bar-fill" style="width:46.5%"></div></div>
+        <div class="bar-value">33</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ INTEREST SHIFT ═══════════ -->
+<div class="section">
+  <div class="section-label">Impact Measurement</div>
+  <h2>Moving the Needle Toward Gold</h2>
+  <p class="section-desc">The event consistently shifts interest upward. 49% of respondents reported higher interest in Clarkson after their visit, while only 6% showed any decline. The "only school being considered" category more than doubled from 9 to 19. Among the 8 respondents who arrived "on the fence," none stayed there.</p>
+
+  <div class="card">
+    <div class="card-title">Interest Level — Before vs. After Attending</div>
+    <div class="shift-viz">
+      <div class="shift-col">
+        <h4>Before Event</h4>
+        <div class="shift-item"><span>The only school!</span><span class="count">9</span></div>
+        <div class="shift-item"><span>Very Interested</span><span class="count">34</span></div>
+        <div class="shift-item"><span>Somewhat Interested</span><span class="count">19</span></div>
+        <div class="shift-item"><span>On the fence / Neutral</span><span class="count">8</span></div>
+        <div class="shift-item"><span>Not very interested</span><span class="count">1</span></div>
+      </div>
+      <div class="shift-col-center">
+        <div class="shift-arrow">→</div>
+      </div>
+      <div class="shift-col">
+        <h4>After Event</h4>
+        <div class="shift-item"><span>The only school!</span><span class="count" style="color:#7a9a01;">19</span></div>
+        <div class="shift-item"><span>Very Interested</span><span class="count">43</span></div>
+        <div class="shift-item"><span>Somewhat Interested</span><span class="count">7</span></div>
+        <div class="shift-item"><span>On the fence / Neutral</span><span class="count">2</span></div>
+        <div class="shift-item"><span>Not very interested</span><span class="count">0</span></div>
+      </div>
+    </div>
+
+    <div class="shift-summary">
+      <div class="shift-summary-card">
+        <div class="num up">35</div>
+        <div class="label">Interest Increased (49%)</div>
+      </div>
+      <div class="shift-summary-card">
+        <div class="num same">32</div>
+        <div class="label">Interest Held Steady (45%)</div>
+      </div>
+      <div class="shift-summary-card">
+        <div class="num down">4</div>
+        <div class="label">Interest Decreased (6%)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ WHY CLARKSON ═══════════ -->
+<div class="section">
+  <div class="section-label">Decision Drivers</div>
+  <h2>What Draws Knights to the Table</h2>
+  <p class="section-desc">Financial Aid topped the primary-reason list in 2026, edging out Program Offerings. But the full picture (all contributing factors) shows Programs and Career Placement leading when families consider the complete package of what draws them to Clarkson.</p>
+
+  <div class="card">
+    <div class="card-title">Primary Reason for Considering Clarkson</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Financial Aid Package</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <div class="bar-value">19</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Program Offerings</div>
+        <div class="bar-track"><div class="bar-fill" style="width:84.2%"></div></div>
+        <div class="bar-value">16</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Hands-on Learning</div>
+        <div class="bar-track"><div class="bar-fill gold" style="width:73.7%"></div></div>
+        <div class="bar-value">14</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">The "Feeling"</div>
+        <div class="bar-track"><div class="bar-fill" style="width:52.6%"></div></div>
+        <div class="bar-value">10</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Career Placement</div>
+        <div class="bar-track"><div class="bar-fill" style="width:31.6%"></div></div>
+        <div class="bar-value">6</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Distance / Size / Other</div>
+        <div class="bar-track"><div class="bar-fill" style="width:31.6%"></div></div>
+        <div class="bar-value">6</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">All Contributing Factors (Multi-Select)</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Program Offerings</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <div class="bar-value">37</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Career Placement</div>
+        <div class="bar-track"><div class="bar-fill" style="width:78.4%"></div></div>
+        <div class="bar-value">29</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">The "Feeling"</div>
+        <div class="bar-track"><div class="bar-fill gold" style="width:73.0%"></div></div>
+        <div class="bar-value">27</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Financial Aid</div>
+        <div class="bar-track"><div class="bar-fill" style="width:67.6%"></div></div>
+        <div class="bar-value">25</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Hands-on Learning</div>
+        <div class="bar-track"><div class="bar-fill" style="width:64.9%"></div></div>
+        <div class="bar-value">24</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Size of University</div>
+        <div class="bar-track"><div class="bar-fill" style="width:56.8%"></div></div>
+        <div class="bar-value">21</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Location</div>
+        <div class="bar-track"><div class="bar-fill" style="width:29.7%"></div></div>
+        <div class="bar-value">11</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Distance from Home</div>
+        <div class="bar-track"><div class="bar-fill" style="width:27.0%"></div></div>
+        <div class="bar-value">10</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Legacy</div>
+        <div class="bar-track"><div class="bar-fill" style="width:13.5%"></div></div>
+        <div class="bar-value">5</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-light);margin-top:12px;">Other write-ins included AFROTC, club opportunities, scholarship funding and outdoor activities.</p>
+  </div>
+</div>
+
+<!-- ═══════════ OVERALL AGREEMENT ═══════════ -->
+<div class="section">
+  <div class="section-label">Overall Sentiment</div>
+  <h2>The Verdict: Knight Well Spent</h2>
+  <p class="section-desc">Three key agreement questions confirm the event delivers on its promise. "Worthwhile" hits 94% agreement with 87% strongly agreeing, the kind of number that speaks for itself.</p>
+
+  <div class="donut-row">
+    <div class="donut-card">
+      <h4>Helped me decide where to enroll</h4>
+      <svg class="donut-svg" viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#e8f5f0" stroke-width="14"/>
+        <!-- 52.1% strongly = 176.8 dash -->
+        <circle cx="70" cy="70" r="54" fill="none" stroke="var(--clarkson-green)" stroke-width="14" stroke-dasharray="176.8 339.3" stroke-dashoffset="84.8" transform="rotate(-90 70 70)"/>
+        <!-- 38.0% slightly = 128.9 dash -->
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#5a9a89" stroke-width="14" stroke-dasharray="128.9 339.3" stroke-dashoffset="-92.0" transform="rotate(-90 70 70)"/>
+        <text x="70" y="66" text-anchor="middle" class="donut-center-text">90%</text>
+        <text x="70" y="80" text-anchor="middle" class="donut-center-sub">Agree</text>
+      </svg>
+      <div class="donut-legend">52% Strongly · 38% Slightly</div>
+    </div>
+    <div class="donut-card">
+      <h4>Made me excited about joining Clarkson</h4>
+      <svg class="donut-svg" viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#e8f5f0" stroke-width="14"/>
+        <!-- 69.0% strongly = 234.1 dash -->
+        <circle cx="70" cy="70" r="54" fill="none" stroke="var(--clarkson-green)" stroke-width="14" stroke-dasharray="234.1 339.3" stroke-dashoffset="84.8" transform="rotate(-90 70 70)"/>
+        <!-- 15.5% slightly = 52.6 dash -->
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#5a9a89" stroke-width="14" stroke-dasharray="52.6 339.3" stroke-dashoffset="-149.3" transform="rotate(-90 70 70)"/>
+        <text x="70" y="66" text-anchor="middle" class="donut-center-text">85%</text>
+        <text x="70" y="80" text-anchor="middle" class="donut-center-sub">Agree</text>
+      </svg>
+      <div class="donut-legend">69% Strongly · 15% Slightly</div>
+    </div>
+    <div class="donut-card">
+      <h4>Was a worthwhile experience overall</h4>
+      <svg class="donut-svg" viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#e8f5f0" stroke-width="14"/>
+        <!-- 87.3% strongly = 296.2 dash -->
+        <circle cx="70" cy="70" r="54" fill="none" stroke="var(--clarkson-green)" stroke-width="14" stroke-dasharray="296.2 339.3" stroke-dashoffset="84.8" transform="rotate(-90 70 70)"/>
+        <!-- 7.0% slightly = 23.8 dash -->
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#5a9a89" stroke-width="14" stroke-dasharray="23.8 339.3" stroke-dashoffset="-211.4" transform="rotate(-90 70 70)"/>
+        <text x="70" y="66" text-anchor="middle" class="donut-center-text">94%</text>
+        <text x="70" y="80" text-anchor="middle" class="donut-center-sub">Agree</text>
+      </svg>
+      <div class="donut-legend">87% Strongly · 7% Slightly</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ COMPONENT RATINGS ═══════════ -->
+<div class="section">
+  <div class="section-label">Component Ratings</div>
+  <h2>Knighting the Highlights</h2>
+  <p class="section-desc">Shadowing towers above every other element at 94% favorable, with 86% rating it highly favorable. Lunch with Faculty and the 9x5 sessions performed strongly as well. The Family Mix &amp; Mingle continues to trail and presents the clearest opportunity for a refresh.</p>
+
+  <div class="card">
+    <div class="stacked-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--clarkson-green)"></div>Highly Favorable</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5a9a89"></div>Slightly Favorable</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8cfc8"></div>Neutral</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e8a88a"></div>Slightly Unfavorable</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent-red)"></div>Highly Unfavorable</div>
+    </div>
+    <div class="stacked-chart">
+      <!-- Shadowing: 59/6/2/0/2 = 69 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Shadowing a Student</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:85.5%">86%</div>
+          <div class="seg slightly" style="width:8.7%"></div>
+          <div class="seg neutral" style="width:2.9%"></div>
+          <div class="seg h-unfav" style="width:2.9%"></div>
+        </div>
+      </div>
+      <!-- Communications: 37/23/8/2/0 = 70 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Pre-Event Communications</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:52.9%">53%</div>
+          <div class="seg slightly" style="width:32.9%">33%</div>
+          <div class="seg neutral" style="width:11.4%"></div>
+          <div class="seg s-unfav" style="width:2.9%"></div>
+        </div>
+      </div>
+      <!-- Lunch: 38/11/7/1/2 = 59 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Lunch with Faculty</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:64.4%">64%</div>
+          <div class="seg slightly" style="width:18.6%">19%</div>
+          <div class="seg neutral" style="width:11.9%"></div>
+          <div class="seg s-unfav" style="width:1.7%"></div>
+          <div class="seg h-unfav" style="width:3.4%"></div>
+        </div>
+      </div>
+      <!-- 9x5: 34/14/8/1/2 = 59 -->
+      <div class="stacked-row">
+        <div class="stacked-label">9x5 Support Depts</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:57.6%">58%</div>
+          <div class="seg slightly" style="width:23.7%">24%</div>
+          <div class="seg neutral" style="width:13.6%"></div>
+          <div class="seg s-unfav" style="width:1.7%"></div>
+          <div class="seg h-unfav" style="width:3.4%"></div>
+        </div>
+      </div>
+      <!-- Campus Tour: 27/14/10/0/0 = 51 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Campus Tour</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:52.9%">53%</div>
+          <div class="seg slightly" style="width:27.5%">27%</div>
+          <div class="seg neutral" style="width:19.6%"></div>
+        </div>
+      </div>
+      <!-- Student Panel: 32/18/11/1/1 = 63 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Student Resources Panel</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:50.8%">51%</div>
+          <div class="seg slightly" style="width:28.6%">29%</div>
+          <div class="seg neutral" style="width:17.5%"></div>
+          <div class="seg s-unfav" style="width:1.6%"></div>
+          <div class="seg h-unfav" style="width:1.6%"></div>
+        </div>
+      </div>
+      <!-- Parking: 33/23/6/5/2 = 69 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Parking</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:47.8%">48%</div>
+          <div class="seg slightly" style="width:33.3%">33%</div>
+          <div class="seg neutral" style="width:8.7%"></div>
+          <div class="seg s-unfav" style="width:7.2%"></div>
+          <div class="seg h-unfav" style="width:2.9%"></div>
+        </div>
+      </div>
+      <!-- Food: 30/22/13/3/2 = 70 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Food Options</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:42.9%">43%</div>
+          <div class="seg slightly" style="width:31.4%">31%</div>
+          <div class="seg neutral" style="width:18.6%"></div>
+          <div class="seg s-unfav" style="width:4.3%"></div>
+          <div class="seg h-unfav" style="width:2.9%"></div>
+        </div>
+      </div>
+      <!-- Family Mingle: 19/16/17/3/0 = 55 -->
+      <div class="stacked-row">
+        <div class="stacked-label">Family Mix &amp; Mingle</div>
+        <div class="stacked-track">
+          <div class="seg highly" style="width:34.5%">35%</div>
+          <div class="seg slightly" style="width:29.1%">29%</div>
+          <div class="seg neutral" style="width:30.9%">31%</div>
+          <div class="seg s-unfav" style="width:5.5%"></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:16px;">Note: Component items had varying response counts (51–70) as not all attendees participated in every session. Sorted by total favorability.</p>
+  </div>
+</div>
+
+<!-- ═══════════ WHAT WORKED ═══════════ -->
+<div class="section">
+  <div class="section-label">Open-Ended Feedback</div>
+  <h2>In Their Own Words</h2>
+  <p class="section-desc">When asked what was most useful, one theme dominated every other: the student shadowing experience. Respondents repeatedly pointed to the authenticity of spending real time with a current student in real classes as the moment that sealed the deal.</p>
+
+  <div class="card">
+    <div class="card-title">Most-Cited Themes — "Most Useful Component"</div>
+    <div class="theme-list">
+      <div class="theme-item">
+        <div class="theme-icon">🎓</div>
+        <div>
+          <h4>Shadowing &amp; Class Attendance</h4>
+          <p>The clear winner. Respondents valued attending real lectures, seeing teaching styles firsthand and experiencing the rhythm of a genuine college day with a current student as guide.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon">🗣️</div>
+        <div>
+          <h4>Faculty Interaction at Lunch</h4>
+          <p>Parents called this out repeatedly. One-on-one conversations with professors over lunch were described as "intimate," "personal" and a standout differentiator from other schools' visit days.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon">🏗️</div>
+        <div>
+          <h4>SPEED Lab &amp; Maker Space Tours</h4>
+          <p>The hands-on facilities left strong impressions. Several respondents pointed to the SPEED team tour and the Loft MakerSpace as moments that crystallized what makes Clarkson different.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon">🤝</div>
+        <div>
+          <h4>Student Panel &amp; Community Feel</h4>
+          <p>Hearing current students share candid stories about campus life, teamwork and the Clarkson community helped families gauge culture in a way that marketing materials can't replicate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-grid" style="margin-top:24px;">
+    <div class="quote-card">
+      <p>"Student shadowing. This is gold."</p>
+      <div class="attribution">Parent</div>
+    </div>
+    <div class="quote-card">
+      <p>"It was a chance to see the authentic campus without the 'showmanship' of an open house."</p>
+      <div class="attribution">Accepted Student</div>
+    </div>
+    <div class="quote-card">
+      <p>"My son's first comment at the end was 'that was way more helpful than the other open house visits we've done.' I think it really helped him with that 'feel.'"</p>
+      <div class="attribution">Parent</div>
+    </div>
+    <div class="quote-card">
+      <p>"The will of the staff made unplanned things happen, and I will forever be grateful for it. Words cannot describe how grateful I am for Clarkson hosting Day as a Knight."</p>
+      <div class="attribution">Accepted Student</div>
+    </div>
+    <div class="quote-card">
+      <p>"Lunch with Chuck Thorpe was excellent. He is a great brand ambassador for the comp sci dept! My son was able to join in on discussions and feel like part of the class. In his words, 'it was pretty cool!'"</p>
+      <div class="attribution">Parent</div>
+    </div>
+    <div class="quote-card">
+      <p>"I never thought the community would be a deciding factor for me, but A Day as a Knight really changed that."</p>
+      <div class="attribution">Accepted Student</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ AREAS FOR IMPROVEMENT ═══════════ -->
+<div class="section">
+  <div class="section-label">Areas for Improvement</div>
+  <h2>Where We Can Sharpen the Sword</h2>
+  <p class="section-desc">Most improvement feedback was positive in disguise ("Nothing, it was great!"). The constructive themes that did emerge clustered around shadow match quality and day-of logistics.</p>
+
+  <div class="card">
+    <div class="card-title">Recurring Improvement Themes</div>
+    <div class="theme-list">
+      <div class="theme-item">
+        <div class="theme-icon warn">🔗</div>
+        <div>
+          <h4>Shadow Match Quality</h4>
+          <p>The most frequent concern. Some students were paired with hosts who had no classes that day, were in a different major or didn't show campus life beyond lectures. Multiple respondents asked for better alignment by interest and personality, plus hosts who live on campus.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon warn">🅿️</div>
+        <div>
+          <h4>Parking &amp; Wayfinding</h4>
+          <p>The ERC lot filled up early with no overflow direction. Families parked as far as Cheel Arena. Requests for signage, a parking attendant and a printed campus map came up repeatedly.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon warn">📧</div>
+        <div>
+          <h4>Pre-Event Communication</h4>
+          <p>Some found emails "aggressive" or unclear on logistics. Others wanted shadow student schedules shared ahead of time and better check-in coordination upon arrival.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon warn">🍽️</div>
+        <div>
+          <h4>Food &amp; Dietary Options</h4>
+          <p>Limited options for GF, DF and other restrictions. General sentiment that food variety at the parent lunch could be improved, with one respondent specifically noting Clarkson's dining needs to compete with peer institutions.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon warn">📋</div>
+        <div>
+          <h4>Space &amp; Crowding</h4>
+          <p>Parent rooms were crowded and seating was tight. SPEED lab tours had 30+ parents in a single group. Several respondents asked for smaller group sizes, more breaks and a larger home base room.</p>
+        </div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-icon warn">🎙️</div>
+        <div>
+          <h4>Panel &amp; Representation</h4>
+          <p>Microphone issues made the panel hard to hear from the back. Parents also requested broader major representation on the student panel, particularly Health Sciences.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ RECOMMENDATIONS ═══════════ -->
+<div class="section">
+  <div class="section-label">Recommendations</div>
+  <h2>Forging a Stronger Knight's Tale</h2>
+  <p class="section-desc">Based on the 2026 data, here are six recommendations to build on what's already working and address the gaps.</p>
+
+  <div class="rec-grid">
+    <div class="rec-card">
+      <h4>1. Tighten Shadow Matching</h4>
+      <p>Build a structured matching form that captures major, interests and personality. Require hosts to have at least one class on event day, verify schedules in advance and ensure hosts live on campus when possible. Consider a brief "host training" checklist covering dorms, dining and campus life beyond the classroom.</p>
+    </div>
+    <div class="rec-card gold-border">
+      <h4>2. Share Itineraries Earlier</h4>
+      <p>Send a personalized itinerary (including the shadow student's name and class schedule) 48 hours before the event. Include a campus map with parking alternatives and event locations clearly marked. Let shadow pairs connect by email beforehand.</p>
+    </div>
+    <div class="rec-card">
+      <h4>3. Solve Parking Proactively</h4>
+      <p>Station a parking attendant at the ERC lot to redirect overflow. Pre-designate a secondary lot with signage. Include parking info and a map prominently in pre-event communications.</p>
+    </div>
+    <div class="rec-card gold-border">
+      <h4>4. Break Up Large Groups</h4>
+      <p>Cap SPEED lab tours at 10–12 people per group. Stagger parent sessions to reduce room crowding, add short breaks between panels and consider a larger home base space.</p>
+    </div>
+    <div class="rec-card">
+      <h4>5. Expand Food &amp; Dietary Options</h4>
+      <p>Add clearly labeled dietary options (GF, DF, vegan) at the parent lunch. Survey dietary needs during registration so the catering order reflects actual demand rather than best guesses.</p>
+    </div>
+    <div class="rec-card gold-border">
+      <h4>6. Refresh the Family Mingle</h4>
+      <p>This scored lowest among all components with 31% neutral. Add light icebreaker prompts, conversation-starter cards or optional guided discussion topics. Give parents a reason to engage with each other beyond proximity.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CLOSING ═══════════ -->
+<div class="section" style="border-bottom:none;padding-bottom:40px;">
+  <div class="section-label">Conclusion</div>
+  <h2>The Armor Shines Bright</h2>
+  <p class="section-desc" style="max-width:720px;">A Day as a Knight is doing exactly what it was designed to do: convert accepted students into committed Golden Knights. With a 94% worthwhile rating, 49% of attendees reporting increased interest and open-ended feedback that reads like a love letter to student shadowing, the event is a proven yield asset. The improvement areas are logistical rather than structural, which is the best kind of problem to have. Tighten the matching process, smooth out the parking and communications, give the Family Mingle some life, and this event will continue to be worth its weight in gold.</p>
+</div>
+
+</div>
+
+<div class="footer">
+  <strong>Clarkson University</strong> · Office of Undergraduate Admissions · A Day as a Knight Survey Report<br>
+  2026 cycle data · 71 respondents (February–March 2026) · Prepared by the Digital Communications Team
+</div>
+
+</body>
+</html>
